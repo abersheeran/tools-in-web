@@ -1,0 +1,48 @@
+main #mbk {
+    background: rgb(245, 244, 244);
+    height: 160px;
+    border-bottom: rgb(232, 232, 232) 1px solid;
+}
+
+main #translator {
+    box-shadow: 0 0 5px 0 #ccc;
+    background: #FFF;
+    max-width: 1200px;
+    min-height: 300px;
+    margin: 0 auto;
+    position: relative;
+    top: -100px;
+}
+
+main #translator .header {
+    border-bottom: rgb(232, 232, 232) 1px solid;
+}
+
+main #translator .header .encoding-button {
+    padding: 0.9em 1.8em;
+    width: auto;
+    cursor: pointer;
+    color: gray;
+    border-bottom: 2px transparent solid;
+}
+
+main #translator .header .encoding-button.active {
+    border-bottom: 2px black solid;
+    color: black;
+}
+
+#source,
+#target {
+    min-height: 260px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    padding: 2em;
+    word-wrap: break-word;
+    text-align: start;
+    resize: vertical;
+}
+
+#source {
+    border-right: #ccc 1px solid;
+}
