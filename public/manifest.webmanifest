@@ -1,6 +1,7 @@
 {
   "short_name": "Tools",
-  "name": "Tools created by Aber",
+  "name": "Tools",
+  "description": "Tools created by Aber",
   "icons": [
     {
       "src": "favicon.ico",
