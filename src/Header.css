@@ -68,9 +68,16 @@ header .icon {
     left: -330px;
 }
 
-.menu .menubar .menu-item-left {
+.menu .menubar .menu-item-name {
     display: inline-block;
     width: 90px;
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.menu .menubar .menu-item-description {
+    font-size: 0.8em;
+    color: #bbb;
 }
 
 .menu .menubar .pure-menu-item {
@@ -80,14 +87,13 @@ header .icon {
 
 .menu .menubar .pure-menu-link {
     padding: 1em;
-    padding-right: 7em;
     display: flex;
     justify-content: space-between;
 }
 
-.menu .menubar .pure-menu-link::after {
+/* .menu .menubar .pure-menu-link::after {
     content: "-";
     position: absolute;
     right: 1em;
     top: 1em;
-}
+} */

@@ -38,14 +38,15 @@ function Header() {
         <div className="menu-background" hidden onClick={toggle}></div>
         <div className="menubar menu-hidden">
           <div className="content">
-            <div className="menubar-header" style={{ height: "4em" }}></div>
-            <div className="pure-menu" style={{ paddingLeft: "1em" }}>
-              <span className="pure-menu-heading"></span>
+            <div className="menubar-header logo" style={{ lineHeight: "2.2" }}>
+              Tools
+            </div>
+            <div className="pure-menu">
               <ul className="pure-menu-list">
                 <li className="pure-menu-item">
                   <a href="." className="pure-menu-link">
-                    <span className="menu-item-left">Encoding</span>
-                    <span>解/编码</span>
+                    <span className="menu-item-name">Encoding</span>
+                    <span className="menu-item-description">在几种编码之间互相转换</span>
                   </a>
                 </li>
               </ul>
