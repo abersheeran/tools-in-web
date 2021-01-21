@@ -91,9 +91,6 @@ header .icon {
     justify-content: space-between;
 }
 
-/* .menu .menubar .pure-menu-link::after {
-    content: "-";
-    position: absolute;
-    right: 1em;
-    top: 1em;
-} */
+.menu .menubar .menu-selected {
+    color: #000000;
+}

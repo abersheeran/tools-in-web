@@ -1,8 +1,9 @@
 import React from 'react';
-
+import PropTypes from 'prop-types'
+import { Link, NavLink } from "react-router-dom";
 import './Header.css';
 
-function Header() {
+function Header({ title }: { title: String }) {
   let toggle = () => {
     let icon = document.querySelector(".menu .menu-icon .icon");
     if (icon) {
@@ -39,15 +40,15 @@ function Header() {
         <div className="menubar menu-hidden">
           <div className="content">
             <div className="menubar-header logo" style={{ lineHeight: "2.2" }}>
-              Tools
+              <Link to="/">Tools</Link>
             </div>
             <div className="pure-menu">
               <ul className="pure-menu-list">
                 <li className="pure-menu-item">
-                  <a href="." className="pure-menu-link">
+                  <NavLink to="/encoding" className="pure-menu-link" activeClassName="menu-selected">
                     <span className="menu-item-name">Encoding</span>
                     <span className="menu-item-description">在几种编码之间互相转换</span>
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -58,7 +59,7 @@ function Header() {
         </div>
       </span>
 
-      <span className="logo">Encoding</span>
+      <span className="logo">{title}</span>
 
       <span className="avatar center" title="敬请期待">
         <div className="center" style={{ height: "1.6em" }}>
@@ -79,6 +80,10 @@ function Header() {
       </span>
     </header>
   );
+}
+
+Header.propTypes = {
+  title: PropTypes.string
 }
 
 export default Header;
