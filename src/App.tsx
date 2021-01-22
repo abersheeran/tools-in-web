@@ -14,7 +14,7 @@ function App() {
             <Encoding></Encoding>
           </Route>
           <Route path="/">
-            <Header title=""></Header>
+            <Header title="Index"></Header>
           </Route>
         </Switch>
       </div>
