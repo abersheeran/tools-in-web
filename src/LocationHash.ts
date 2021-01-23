@@ -1,3 +1,5 @@
+import URLSearchParams from '@ungap/url-search-params'
+
 export function setLocationHashValue(name: string, value: any): void {
     let params = new URLSearchParams(window.location.hash.slice(1));
     params.set(name, value);
