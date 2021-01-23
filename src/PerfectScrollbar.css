@@ -11,8 +11,8 @@
 }
 
 /*
-   * Scrollbar rail styles
-   */
+ * Scrollbar rail styles
+ */
 .ps__rail-x {
     display: none;
     opacity: 0;
@@ -63,8 +63,8 @@
 }
 
 /*
-   * Scrollbar thumb styles
-   */
+ * Scrollbar thumb styles
+ */
 .ps__thumb-x {
     background-color: #aaa;
     border-radius: 0px;

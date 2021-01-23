@@ -1,18 +1,44 @@
 import React from 'react';
 import PerfectScrollbar from 'perfect-scrollbar';
-import 'punycode';
-
-import './ps.css';
+import { toUnicode as punycode2text, toASCII as text2punycode } from 'punycode';
+import { setLocationHashValue, getLocationHashValue } from './LocationHash';
+import './PerfectScrollbar.css';
 import './Encoding.css';
 
+type ConvertType = "text" | "url" | "base64" | "unicode" | "ascii" | "punycode";
+
+var convert_types = ["text", "url", "base64", "unicode", "ascii", "punycode"];
+
+function isConvertType(value: string): value is ConvertType {
+  return convert_types.indexOf(value) !== -1;
+}
+
 class Encoding extends React.Component {
-  state = {
-    source_type: "text",
-    target_type: "text",
-    source_text: "",
-  }
+  state: {
+    source_type: ConvertType,
+    target_type: ConvertType,
+    source_text: string,
+  } = {
+      source_type: this.getSourceTypeFromLocationHash(),
+      target_type: this.getTargetTypeFromLocationHash(),
+      source_text: this.getSourceTextFromLocationHash(),
+    }
 
   ps_list: Array<PerfectScrollbar> = []
+
+  getSourceTypeFromLocationHash(): ConvertType {
+    let source_type = getLocationHashValue("source-type") ?? "text";
+    return isConvertType(source_type) ? source_type : "text"
+  }
+
+  getTargetTypeFromLocationHash(): ConvertType {
+    let target_type = getLocationHashValue("target-type") ?? "text";
+    return isConvertType(target_type) ? target_type : "text"
+  }
+
+  getSourceTextFromLocationHash(): string {
+    return getLocationHashValue("source-text") ?? "";
+  }
 
   componentDidMount() {
     var elements = document.getElementsByClassName("ps");
@@ -27,14 +53,21 @@ class Encoding extends React.Component {
 
   changeSourceType = (type: string) => {
     return () => {
+      setLocationHashValue("source-type", type);
       this.setState({ source_type: type })
     }
   }
 
   changeTargetType = (type: string) => {
     return () => {
+      setLocationHashValue("target-type", type);
       this.setState({ target_type: type })
     }
+  }
+
+  setSourceText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setLocationHashValue("source-text", event.target.value);
+    this.setState({ source_text: event.target.value })
   }
 
   swap = () => {
@@ -44,7 +77,6 @@ class Encoding extends React.Component {
   }
 
   render() {
-    let encoding_types = ["text", "url", "base64", "unicode", "ascii", "punycode"];
     let { source_type, target_type, source_text } = this.state;
     let func = getTranslateFunction(source_type, target_type);
 
@@ -56,7 +88,7 @@ class Encoding extends React.Component {
           <div className="header pure-g pure-menu pure-menu-horizontal pure-menu-scrollable" style={{ padding: 0 }}>
             <div className="pure-u-11-24 pure-menu-list ps">
               {
-                encoding_types.map(type => (
+                convert_types.map(type => (
                   <div key={type} onClick={this.changeSourceType(type)}
                     className={`pure-u encoding-button ${type === source_type ? 'active' : ''}`}>
                     {type.toUpperCase()}
@@ -77,7 +109,7 @@ class Encoding extends React.Component {
             </div>
             <div className="pure-u-11-24 pure-menu-list ps">
               {
-                encoding_types.map(type => (
+                convert_types.map(type => (
                   <div key={type} onClick={this.changeTargetType(type)}
                     className={`pure-u encoding-button ${type === target_type ? 'active' : ''}`}>
                     {type.toUpperCase()}
@@ -88,7 +120,7 @@ class Encoding extends React.Component {
           </div>
           <div className="pure-g">
             <textarea id="source" className="pure-u-1-2 code-font" value={source_text}
-              onChange={event => this.setState({ source_text: event.target.value })}></textarea>
+              onChange={this.setSourceText}></textarea>
             <textarea id="target" className="pure-u-1-2 code-font" readOnly value={func(source_text)}></textarea>
           </div>
         </div>
@@ -97,86 +129,37 @@ class Encoding extends React.Component {
   }
 }
 
-function getTranslateFunction(source_type: string, target_type: string) {
-  if (source_type === "text" || target_type === "text") {
-    return eval(source_type + "2" + target_type)
-  }
-  else {
-    let _func0 = eval("text2" + target_type),
-      _func1 = eval(source_type + "2text");
-    return (value: string) => { _func0(_func1(value)) }
-  }
-}
-
-function utoa(str: string) {
-  /*
-   使用utf-8字符集进行base64编码
-   */
-  return window.btoa(unescape(encodeURIComponent(str)));
-}
-
-function atou(str: string) {
-  /*
-   使用utf-8字符集解析base64字符串
-   */
-  return decodeURIComponent(escape(window.atob(str)));
-}
-
-function text2text(value: string) {
-  return value;
-}
-
-function base642text(value: string) {
-  try {
-    return atou(value);
-  } catch (e) {
-    console.error("invalid base64: " + value);
-    return "";
-  }
-}
-
-function text2base64(value: string) {
-  return utoa(value);
-}
-
-function url2text(value: string) {
-  return decodeURI(value);
-}
-
-function text2url(value: string) {
-  return encodeURI(value);
-}
-
-function unicode2text(value: string) {
-  return unescape(value.replace(/\\u/g, '%u'));
-}
-
-function text2unicode(value: string) {
-  return escape(value).replace(/%u/g, '\\u');
-}
-
-function ascii2text(value: string) {
-  return value.split("%").filter(function (item) {
-    return item;
-  }).map(function (item) {
-    return String.fromCodePoint(parseInt(item, 16));
-  }).join("")
-}
-
-function text2ascii(value: string) {
-  return value.split("").map(function (item: string) {
-    return "%" + item.codePointAt(0)?.toString(16).toUpperCase();
-  }).join("")
-}
-
-var punycode = require('punycode');
-
-function punycode2text(value: string) {
-  return punycode.toUnicode(value)
-}
-
-function text2punycode(value: string) {
-  return punycode.toASCII(value)
+function getTranslateFunction(source_type: ConvertType, target_type: ConvertType): (value: string) => string {
+  let functions: Record<string, (value: string) => string> = {
+    "text2text": (value: string) => value,
+    "base642text": (value: string) => {
+      try {
+        return decodeURIComponent(escape(window.atob(value)));
+      } catch (e) {
+        console.error("invalid base64: " + value);
+        return "";
+      }
+    },
+    "text2base64": (value: string) => window.btoa(unescape(encodeURIComponent(value))),
+    "url2text": decodeURI,
+    "text2url": encodeURI,
+    "unicode2text": (value: string) => unescape(value.replace(/\\u/g, '%u')),
+    "text2unicode": (value: string) => escape(value).replace(/%u/g, '\\u'),
+    "ascii2text": (value: string) => {
+      try {
+        return value.split("%").filter(item => item).map(item => String.fromCodePoint(parseInt(item, 16))).join("")
+      } catch (e) {
+        console.error("invalid ascii number: " + value);
+        return ""
+      }
+    },
+    "text2ascii": (value: string) => {
+      return value.split("").map(item => "%" + item.codePointAt(0)?.toString(16).toUpperCase()).join("")
+    },
+    "punycode2text": punycode2text,
+    "text2punycode": text2punycode,
+  };
+  return (value: string) => functions["text2" + target_type](functions[source_type + "2text"](value))
 }
 
 export default Encoding;
