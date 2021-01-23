@@ -44,5 +44,11 @@ main #translator .header .encoding-button.active {
 }
 
 #source {
-    border-right: #ccc 1px solid;
+    border-bottom: #ccc 1px solid;
+}
+
+@media screen and (min-width:48em) {
+    #source {
+        border-right: #ccc 1px solid;
+    }
 }

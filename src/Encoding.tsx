@@ -119,9 +119,9 @@ class Encoding extends React.Component {
             </div>
           </div>
           <div className="pure-g">
-            <textarea id="source" className="pure-u-1-2 code-font" value={source_text}
+            <textarea id="source" className="pure-u-1 pure-u-md-1-2 code-font" value={source_text}
               onChange={this.setSourceText}></textarea>
-            <textarea id="target" className="pure-u-1-2 code-font" readOnly value={func(source_text)}></textarea>
+            <textarea id="target" className="pure-u-1 pure-u-md-1-2 code-font" readOnly value={func(source_text)}></textarea>
           </div>
         </div>
       </main>
