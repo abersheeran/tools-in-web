@@ -73,6 +73,9 @@ class Encoding extends React.Component {
   swap = () => {
     let { source_type, target_type, source_text } = this.state;
     let func = getTranslateFunction(source_type, target_type);
+    setLocationHashValue("source-type", target_type);
+    setLocationHashValue("target-type", source_type);
+    setLocationHashValue("source-text", func(source_text));
     this.setState({ source_type: target_type, target_type: source_type, source_text: func(source_text) });
   }
 
