@@ -1,9 +1,3 @@
-main #mbk {
-    background: rgb(245, 244, 244);
-    height: 160px;
-    border-bottom: rgb(232, 232, 232) 1px solid;
-}
-
 main #translator {
     box-shadow: 0 0 5px 0 #ccc;
     background: #FFF;

@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types'
+import React, { FunctionComponent } from 'react';
 import { Link, NavLink } from "react-router-dom";
+import { apps } from "./App";
 import './Header.css';
 
-function Header({ title }: { title: String }) {
+
+let Header: FunctionComponent<{ title: string }> = ({ title }) => {
   let toggle = () => {
     let icon = document.querySelector(".menu .menu-icon .icon");
     if (icon) {
@@ -44,12 +45,14 @@ function Header({ title }: { title: String }) {
             </div>
             <div className="pure-menu">
               <ul className="pure-menu-list">
-                <li className="pure-menu-item">
-                  <NavLink to="/encoding" className="pure-menu-link" activeClassName="menu-selected">
-                    <span className="menu-item-name">Encoding</span>
-                    <span className="menu-item-description">在几种编码之间互相转换</span>
-                  </NavLink>
-                </li>
+                {apps.map(app => (
+                  <li key={app.link} className="pure-menu-item">
+                    <NavLink to={app.link} className="pure-menu-link" activeClassName="menu-selected">
+                      <span className="menu-item-name">{app.title}</span>
+                      <span className="menu-item-description">{app.description}</span>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -80,10 +83,6 @@ function Header({ title }: { title: String }) {
       </span>
     </header>
   );
-}
-
-Header.propTypes = {
-  title: PropTypes.string
 }
 
 export default Header;

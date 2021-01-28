@@ -24,8 +24,6 @@ class Encoding extends React.Component {
       source_text: this.getSourceTextFromLocationHash(),
     }
 
-  ps_list: Array<PerfectScrollbar> = []
-
   getSourceTypeFromLocationHash(): ConvertType {
     let source_type = getLocationHashValue("source-type") ?? "text";
     return isConvertType(source_type) ? source_type : "text"
@@ -39,6 +37,8 @@ class Encoding extends React.Component {
   getSourceTextFromLocationHash(): string {
     return getLocationHashValue("source-text") ?? "";
   }
+
+  ps_list: Array<PerfectScrollbar> = []
 
   componentDidMount() {
     var elements = document.getElementsByClassName("ps");
@@ -85,7 +85,10 @@ class Encoding extends React.Component {
 
     return (
       <main className="pure-g">
-        <div className="pure-u-1" id="mbk"></div>
+        <div className="pure-u-1" style={{
+          background: "rgb(245, 244, 244)", height: 160,
+          borderBottom: "rgb(232, 232, 232) 1px solid"
+        }}></div>
 
         <div className="pure-u-22-24" id="translator">
           <div className="header pure-g pure-menu pure-menu-horizontal pure-menu-scrollable" style={{ padding: 0 }}>
@@ -127,7 +130,7 @@ class Encoding extends React.Component {
             <textarea id="target" className="pure-u-1 pure-u-md-1-2 code-font" readOnly value={func(source_text)}></textarea>
           </div>
         </div>
-      </main>
+      </main >
     );
   }
 }
