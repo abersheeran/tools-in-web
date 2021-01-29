@@ -6,7 +6,7 @@ const ErrorIconSvg = <svg style={{ display: "block", height: "1em" }} viewBox="0
 
 const Notification: FunctionComponent<{ icon: JSX.Element, description: string }> = ({ icon, description }) => (
   <div style={{
-    display: "flex", justifyContent: "center", alignItems: "center",
+    display: "flex", justifyContent: "end", alignItems: "center",
     margin: "1em 0", padding: "0.5em 1em 0.5em 0",
     boxShadow: `0 0.2rem 0.5rem rgb(0 0 0 / 10%), 0 0 0.05rem rgb(0 0 0 / 30%)`
   }}>
@@ -22,13 +22,14 @@ export const sendNotification = (status: "success" | "error", description: strin
     notification_dom.style.position = "fixed";
     notification_dom.style.top = "5em";
     notification_dom.style.right = "1em";
+    notification_dom.style.textAlign = "right";
     document.body.appendChild(notification_dom);
   }
 
   let dom = document.createElement("div");
   notification_dom.appendChild(dom)
   ReactDOM.render(
-    <Notification icon={status == "success" ? SuccessIconSvg : ErrorIconSvg} description={description} />,
+    <Notification icon={status === "success" ? SuccessIconSvg : ErrorIconSvg} description={description} />,
     dom,
     () => {
       setTimeout(dom => {
