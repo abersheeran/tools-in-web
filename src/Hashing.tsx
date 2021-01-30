@@ -86,7 +86,7 @@ class Hashing extends React.Component<{}, { text: string }> {
               <HashResult name="sha256" text={text} fn={(text: string) => SHA256(text).toString()} />
               <HashResult name="sha384" text={text} fn={(text: string) => SHA384(text).toString()} />
               <HashResult name="sha512" text={text} fn={(text: string) => SHA512(text).toString()} />
-              <HashResult name="ripem-160" text={text} fn={(text: string) => RIPEMD160(text).toString()} />
+              <HashResult name="ripem160" text={text} fn={(text: string) => RIPEMD160(text).toString()} />
             </div>
           </div>
         </div>
