@@ -23,17 +23,17 @@ class HashResult extends React.Component<{ name: string, text: string, fn: (text
     const value = this.props.fn(this.props.text).toUpperCase();
 
     return (
-      <div className="pure-u-1" style={{
+      <div className="pure-u-1 code-font" style={{
         padding: "0.4em", display: "flex", justifyContent: "space-between", alignItems: "center"
       }}>
         <label style={{ paddingRight: "0.5em" }}>
-          {this.props.name.toUpperCase()}
+          {this.props.name.normalize()}
         </label>
         <input id={this.props.name} data-clipboard-target={"#" + this.props.name}
           type="text" value={value} readOnly
           style={{
-            border: "1px #ccc solid", outline: "none", padding: ".2em .5em",
-            width: "calc(100% - 7em)", backgroundColor: "transparent"
+            border: "1px #eee solid", outline: "none", padding: ".2em .5em",
+            width: "calc(100% - 7em)", backgroundColor: "transparent", color: "inherit"
           }}
         />
       </div>
@@ -41,7 +41,7 @@ class HashResult extends React.Component<{ name: string, text: string, fn: (text
   }
 }
 
-class Hashing extends React.Component {
+class Hashing extends React.Component<{}, { text: string }> {
   state = {
     text: ""
   }
@@ -75,7 +75,7 @@ class Hashing extends React.Component {
                 rows={10} value={text} className="code-font" onChange={(event) => { this.setState({ text: event.target.value }) }}>
               </textarea>
             </div>
-            <div className="pure-u-1 pure-u-md-1-2" style={{ backgroundColor: "#EEEEEE", padding: ".5em" }}>
+            <div className="pure-u-1 pure-u-md-1-2" style={{ backgroundColor: "rgb(37, 37, 37)", color: "#bbb", padding: ".5em" }}>
               <HashResult name="md5" text={text} fn={(text: string) => MD5(text).toString()} />
               <HashResult name="sha1" text={text} fn={(text: string) => SHA1(text).toString()} />
               <HashResult name="sha3-224" text={text} fn={(text: string) => SHA3(text, { outputLength: 224 }).toString()} />
