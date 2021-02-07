@@ -15,7 +15,7 @@ export const apps = [
   {
     link: "/hashing",
     title: "Hashing",
-    description: "计算文本的哈希值",
+    description: "计算文本/文件的哈希值",
     component: <Hashing />
   },
 ]

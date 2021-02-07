@@ -57,14 +57,14 @@ let Header: FunctionComponent<{ title: string }> = ({ title }) => {
             </div>
           </div>
           <div className="footer" style={{ padding: "3em", fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>
-            Copyright&copy; by AberS
+            Copyright&copy; by <a href="https://aber.sh" style={{ textDecoration: "underline" }}>Aber</a>
           </div>
         </div>
       </span>
 
       <span className="logo">{title}</span>
 
-      <span className="avatar center" title="敬请期待">
+      <span className="avatar center" title="TODO">
         <div className="center" style={{ height: "1.6em" }}>
           <svg className="icon" viewBox="0 0 1024 1024" version="1.1"
             xmlns="http://www.w3.org/2000/svg" p-id="2914">
