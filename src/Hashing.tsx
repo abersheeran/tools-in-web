@@ -84,7 +84,8 @@ class Hashing extends React.Component<{},
           borderBottom: "rgb(232, 232, 232) 1px solid"
         }}></div>
 
-        <div className="pure-u-22-24 pure-u-lg-20-24 pure-u-xl-18-24" style={{ margin: "0 auto", position: "relative", top: "-100px" }}>
+        <div className="pure-u-22-24 pure-u-lg-20-24 pure-u-xl-18-24"
+          style={{ margin: "0 auto", position: "relative", top: "-100px", boxShadow: "0 0 5px 0 #ccc" }}>
           <div className="pure-g">
             <div className="pure-u-1 pure-u-md-1-2" style={{ backgroundColor: "#ffffff", border: "1px #eee solid", borderRight: "none" }}>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -113,7 +114,7 @@ class Hashing extends React.Component<{},
               </textarea>
             </div>
 
-            <div className="pure-u-1 pure-u-md-1-2" style={{ backgroundColor: "rgb(37, 37, 37)", color: "#bbb", padding: ".5em" }}>
+            <div className="pure-u-1 pure-u-md-1-2" style={{ backgroundColor: "#FFFFFF", border: "1px #eee solid", padding: ".5em" }}>
               <HashResult name="md5" hashable={hashable} fn={(hashable: string) => MD5(hashable).toString()} />
               <HashResult name="sha1" hashable={hashable} fn={(hashable: string) => SHA1(hashable).toString()} />
               <HashResult name="sha3-224" hashable={hashable} fn={(hashable: string) => SHA3(hashable, { outputLength: 224 }).toString()} />
