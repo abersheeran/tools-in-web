@@ -42,6 +42,12 @@ class HashResult extends React.Component<{ name: string, hashable: string, fn: (
   }
 }
 
+function autoHeight(element: HTMLTextAreaElement) {
+  element.style.height = 'auto';
+  element.scrollTop = 0; //防抖动
+  element.style.height = element.scrollHeight + 2 + 'px';
+}
+
 class Hashing extends React.Component<{},
   { hashable: string | CryptoJS.lib.WordArray, file: File | null, loading: boolean }> {
   state = { hashable: "", file: new File([], ""), loading: false }
@@ -109,7 +115,7 @@ class Hashing extends React.Component<{},
               </div>
               <textarea
                 style={{ border: "none", outline: "none", minHeight: "25.5em", width: "100%", padding: "1em", resize: "vertical", backgroundColor: "transparent" }}
-                rows={10} value={text} className="code-font" onChange={(event) => { this.setState({ hashable: event.target.value }) }}
+                value={text} className="code-font" onChange={(event) => { autoHeight(event.target); this.setState({ hashable: event.target.value }) }}
                 readOnly={file.size > 0}>
               </textarea>
             </div>

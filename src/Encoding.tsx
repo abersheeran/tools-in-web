@@ -13,6 +13,12 @@ function isConvertType(value: string): value is ConvertType {
   return convert_types.indexOf(value) !== -1;
 }
 
+function autoHeight(element: HTMLTextAreaElement) {
+  element.style.height = 'auto';
+  element.scrollTop = 0; //防抖动
+  element.style.height = element.scrollHeight + 2 + 'px';
+}
+
 class Encoding extends React.Component {
   state: {
     source_type: ConvertType,
@@ -67,6 +73,7 @@ class Encoding extends React.Component {
 
   setSourceText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLocationHashValue("source-text", event.target.value);
+    autoHeight(event.target);
     this.setState({ source_text: event.target.value })
   }
 
