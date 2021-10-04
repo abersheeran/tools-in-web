@@ -147,7 +147,7 @@ function getTranslateFunction(source_type: ConvertType, target_type: ConvertType
     "text2text": (value: string) => value,
     "base642text": (value: string) => {
       try {
-        return decodeURIComponent(escape(window.atob(value)));
+        return decodeURIComponent(escape(window.atob(value.trim())));
       } catch (e) {
         console.error("invalid base64: " + value);
         return "";
