@@ -116,7 +116,7 @@ class Hashing extends React.Component<{},
               <textarea
                 style={{ border: "none", outline: "none", minHeight: "25.5em", width: "100%", padding: "1em", resize: "vertical", backgroundColor: "transparent" }}
                 value={text} className="code-font" onChange={(event) => { autoHeight(event.target); this.setState({ hashable: event.target.value }) }}
-                readOnly={file.size > 0}>
+                readOnly={file.size > 0} ref={(dom) => { dom?.focus(); }}>
               </textarea>
             </div>
 
