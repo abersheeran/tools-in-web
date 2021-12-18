@@ -20,6 +20,8 @@ let Header: FunctionComponent<{ title: string }> = ({ title }) => {
     }
   }
 
+  document.title = `${title} | Tools`
+
   return (
     <header className="pure-u-1"
       style={{ position: "sticky", top: 0, zIndex: 9999, display: "flex", justifyContent: "space-between" }}>

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, NavLink } from "react-router-dom";
 import Header from './Header';
 import Encoding from './Encoding';
 import Hashing from './Hashing';
+import './App.css';
 
 
 export const apps = [
@@ -30,6 +31,14 @@ export const App = () => (
       ))}
       <Route exact path="/">
         <Header title="Index" />
+        <main className="apps">
+          {apps.map(app => (
+            <NavLink to={app.link} className="app" key={app.link}>
+              <h2 style={{ fontWeight: "normal", fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>{app.title}</h2>
+              <p>{app.description}</p>
+            </NavLink>
+          ))}
+        </main>
       </Route>
     </Switch>
   </div>
