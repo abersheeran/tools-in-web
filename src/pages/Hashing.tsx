@@ -3,7 +3,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import ClipboardJS from "clipboard";
 import CryptoJS from "crypto-js";
 import { MD5, SHA1, SHA3, SHA224, SHA256, SHA384, SHA512, RIPEMD160 } from 'crypto-js';
-import { sendNotification } from "./Notification";
+import { sendNotification } from "../components/Notification";
 import "./Hashing.css";
 
 class HashResult extends React.Component<{ name: string, hashable: string, fn: (text: string) => string }> {

@@ -1,11 +1,10 @@
 import React from 'react';
 import { render } from 'react-snapshot';
 import { BrowserRouter as Router } from "react-router-dom";
-import './pure.min.css';
-import './index.css';
-import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
+import App from './pages/App';
 
 render(
   <React.StrictMode>

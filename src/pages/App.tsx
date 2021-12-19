@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Route, NavLink } from "react-router-dom";
-import Header from './Header';
+import Header from '../components/Header';
 import Encoding from './Encoding';
 import Hashing from './Hashing';
+import Time from './Time';
 import './App.css';
 
 
@@ -19,6 +20,12 @@ export const apps = [
     description: "计算文本/文件的哈希值",
     component: <Hashing />
   },
+  {
+    link: "/time",
+    title: "Time",
+    description: "时间戳与可读时间的转换",
+    component: <Time />
+  }
 ]
 
 export const App = () => (

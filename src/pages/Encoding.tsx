@@ -1,8 +1,7 @@
 import React from 'react';
-import PerfectScrollbar from 'perfect-scrollbar';
 import { toUnicode as punycode2text, toASCII as text2punycode } from 'punycode';
-import { setLocationHashValue, getLocationHashValue } from './LocationHash';
-import './PerfectScrollbar.css';
+import Scrollbar from '../components/Scrollbar';
+import { setLocationHashValue, getLocationHashValue } from '../utils/LocationHash';
 import './Encoding.css';
 
 type ConvertType = "text" | "url" | "base64" | "unicode" | "ascii" | "punycode";
@@ -44,18 +43,18 @@ class Encoding extends React.Component {
     return getLocationHashValue("source-text") ?? "";
   }
 
-  ps_list: Array<PerfectScrollbar> = []
+  // ps_list: Array<PerfectScrollbar> = []
 
-  componentDidMount() {
-    var elements = document.getElementsByClassName("ps");
-    for (var i = 0; i < elements.length; i++) {
-      this.ps_list.push(new PerfectScrollbar(elements[i]));
-    }
-  }
+  // componentDidMount() {
+  //   var elements = document.getElementsByClassName("ps");
+  //   for (var i = 0; i < elements.length; i++) {
+  //     this.ps_list.push(new PerfectScrollbar(elements[i]));
+  //   }
+  // }
 
-  componentWillUnmount() {
-    this.ps_list.map(ps => ps.destroy())
-  }
+  // componentWillUnmount() {
+  //   this.ps_list.map(ps => ps.destroy())
+  // }
 
   changeSourceType = (type: string) => {
     return () => {
@@ -99,15 +98,17 @@ class Encoding extends React.Component {
 
         <div className="pure-u-22-24" id="translator">
           <div className="header pure-g pure-menu pure-menu-horizontal pure-menu-scrollable" style={{ padding: 0 }}>
-            <div className="pure-u-11-24 pure-menu-list ps">
-              {
-                convert_types.map(type => (
-                  <div key={type} onClick={this.changeSourceType(type)}
-                    className={`pure-u encoding-button ${type === source_type ? 'active' : ''}`}>
-                    {type.toUpperCase()}
-                  </div>
-                ))
-              }
+            <div className="pure-u-11-24 pure-menu-list">
+              <Scrollbar>
+                {
+                  convert_types.map(type => (
+                    <div key={type} onClick={this.changeSourceType(type)}
+                      className={`pure-u encoding-button ${type === source_type ? 'active' : ''}`}>
+                      {type.toUpperCase()}
+                    </div>
+                  ))
+                }
+              </Scrollbar>
             </div>
             <div className="pure-u-2-24" onClick={this.swap} style={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
               <button style={{ padding: 0, margin: 0, background: "transparent", boxShadow: "none", border: "none", outline: "none" }}>
@@ -120,15 +121,17 @@ class Encoding extends React.Component {
                 </svg>
               </button>
             </div>
-            <div className="pure-u-11-24 pure-menu-list ps">
-              {
-                convert_types.map(type => (
-                  <div key={type} onClick={this.changeTargetType(type)}
-                    className={`pure-u encoding-button ${type === target_type ? 'active' : ''}`}>
-                    {type.toUpperCase()}
-                  </div>
-                ))
-              }
+            <div className="pure-u-11-24 pure-menu-list">
+              <Scrollbar>
+                {
+                  convert_types.map(type => (
+                    <div key={type} onClick={this.changeTargetType(type)}
+                      className={`pure-u encoding-button ${type === target_type ? 'active' : ''}`}>
+                      {type.toUpperCase()}
+                    </div>
+                  ))
+                }
+              </Scrollbar>
             </div>
           </div>
           <div className="pure-g">
