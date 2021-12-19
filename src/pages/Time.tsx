@@ -36,13 +36,13 @@ export default class Time extends React.Component {
     return (
       <main className="time pure-form pure-form-aligned">
         <div className="pure-control-group">
-          <label htmlFor="timestamp">十位时间戳</label>
+          <label htmlFor="timestamp">秒级时间戳</label>
           <input id="timestamp" value={now_second} type="number"
             onChange={event => { this.setState({ now: event.target.valueAsNumber * 1000 }) }} />
         </div>
 
         <div className="pure-control-group">
-          <label htmlFor="timestamp">十三位时间戳</label>
+          <label htmlFor="timestamp">毫秒级时间戳</label>
           <input id="timestamp" value={now} type="number"
             onChange={event => { this.setState({ now: event.target.valueAsNumber }) }} />
         </div>
