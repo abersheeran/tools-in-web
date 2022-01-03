@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Encoding from './Encoding';
 import Hashing from './Hashing';
 import Time from './Time';
+import TextShare from "./TextShare";
 import './App.css';
 
 
@@ -25,6 +26,12 @@ export const apps = [
     title: "Time",
     description: "时间戳与可读时间的转换",
     component: <Time />
+  },
+  {
+    link: "/text-share",
+    title: "Text Share",
+    description: "压缩文本到 URL 中以便分享",
+    component: <TextShare />
   }
 ]
 

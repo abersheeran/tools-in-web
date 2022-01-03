@@ -1,6 +1,7 @@
 import React from 'react';
 import { toUnicode as punycode2text, toASCII as text2punycode } from 'punycode';
 import Scrollbar from '../components/Scrollbar';
+import { autoHeight } from '../utils/autoHeight';
 import { setLocationHashValue, getLocationHashValue } from '../utils/LocationHash';
 import './Encoding.css';
 
@@ -10,12 +11,6 @@ var convert_types = ["text", "url", "base64", "unicode", "ascii", "punycode"];
 
 function isConvertType(value: string): value is ConvertType {
   return convert_types.indexOf(value) !== -1;
-}
-
-function autoHeight(element: HTMLTextAreaElement) {
-  element.style.height = 'auto';
-  element.scrollTop = 0; //防抖动
-  element.style.height = element.scrollHeight + 2 + 'px';
 }
 
 class Encoding extends React.Component {
@@ -42,19 +37,6 @@ class Encoding extends React.Component {
   getSourceTextFromLocationHash(): string {
     return getLocationHashValue("source-text") ?? "";
   }
-
-  // ps_list: Array<PerfectScrollbar> = []
-
-  // componentDidMount() {
-  //   var elements = document.getElementsByClassName("ps");
-  //   for (var i = 0; i < elements.length; i++) {
-  //     this.ps_list.push(new PerfectScrollbar(elements[i]));
-  //   }
-  // }
-
-  // componentWillUnmount() {
-  //   this.ps_list.map(ps => ps.destroy())
-  // }
 
   changeSourceType = (type: string) => {
     return () => {
@@ -86,8 +68,14 @@ class Encoding extends React.Component {
   }
 
   render() {
-    let { source_type, target_type, source_text } = this.state;
-    let func = getTranslateFunction(source_type, target_type);
+    const { source_type, target_type, source_text } = this.state;
+    const func = getTranslateFunction(source_type, target_type);
+    const target_text = func(source_text);
+
+    const source_textarea = document.querySelector<HTMLElement>("#source");
+    if (source_textarea !== null) {
+      autoHeight(source_textarea);
+    }
 
     return (
       <main className="pure-g">
@@ -136,8 +124,8 @@ class Encoding extends React.Component {
           </div>
           <div className="pure-g">
             <textarea id="source" className="pure-u-1 pure-u-md-1-2 code-font" value={source_text}
-              onChange={this.setSourceText} ref={(dom) => { dom?.focus(); }}></textarea>
-            <textarea id="target" className="pure-u-1 pure-u-md-1-2 code-font" readOnly value={func(source_text)}></textarea>
+              onChange={this.setSourceText} ref={(dom) => { dom?.focus() }}></textarea>
+            <textarea id="target" className="pure-u-1 pure-u-md-1-2 code-font" readOnly value={target_text}></textarea>
           </div>
         </div>
       </main >
@@ -157,8 +145,8 @@ function getTranslateFunction(source_type: ConvertType, target_type: ConvertType
       }
     },
     "text2base64": (value: string) => window.btoa(unescape(encodeURIComponent(value))),
-    "url2text": decodeURI,
-    "text2url": encodeURI,
+    "url2text": decodeURIComponent,
+    "text2url": encodeURIComponent,
     "unicode2text": (value: string) => unescape(value.replace(/\\u/g, '%u')),
     "text2unicode": (value: string) => escape(value).replace(/%u/g, '\\u'),
     "ascii2text": (value: string) => {

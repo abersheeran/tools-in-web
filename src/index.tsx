@@ -3,6 +3,8 @@ import { render } from 'react-snapshot';
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import "./pure.min.css";
+import "./custom-pure.css";
 import './index.css';
 import App from './pages/App';
 
