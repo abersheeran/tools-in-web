@@ -1,0 +1,12 @@
+button {
+    background-color: transparent;
+    border: 1px #eee solid;
+}
+
+button:hover {
+    background-color: #eee;
+}
+
+button:active {
+    background-color: #ccc;
+}

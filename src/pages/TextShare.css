@@ -1,0 +1,12 @@
+main.text-share #textarea {
+    border: none;
+    outline: none;
+    caret-color: #000000;
+    box-sizing: border-box;
+    padding: 2em;
+    word-wrap: break-word;
+    text-align: start;
+    resize: vertical;
+    min-height: calc(100vh - 5em);
+    width: 100vw;
+}
