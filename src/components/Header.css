@@ -1,0 +1,97 @@
+header {
+    padding: 1em;
+    border-bottom: rgb(232, 232, 232) 1px solid;
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header a {
+    color: #000000;
+    text-decoration: none;
+}
+
+header .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .icon {
+    display: inline-block;
+    height: 1.6em;
+    cursor: pointer;
+}
+
+.menu .menu-icon {
+    z-index: 10001;
+}
+
+.menu .menu-icon .icon,
+.menu .menubar {
+    transition: 0.5s;
+}
+
+.menu .menu-icon .icon.right {
+    transform: rotate(180deg);
+}
+
+.menu .menu-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.3;
+    z-index: 9999;
+}
+
+.menu .menubar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 320px;
+    overflow: auto;
+    z-index: 10000;
+    background-color: #FFFFFF;
+    box-shadow: 0px 3px 3px 0 #9c9c9c;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu .menubar.menu-hidden {
+    left: -330px;
+}
+
+.menu .menubar .menu-item-name {
+    display: inline-block;
+    width: 90px;
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.menu .menubar .menu-item-description {
+    font-size: 0.8em;
+    line-height: 1.4;
+    color: #bbb;
+}
+
+.menu .menubar .pure-menu-item {
+    border-top: 1px rgb(240, 240, 240) solid;
+    position: relative;
+}
+
+.menu .menubar .pure-menu-link {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu .menubar .menu-selected {
+    color: #000000;
+}

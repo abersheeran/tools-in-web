@@ -1,0 +1,11 @@
+main.time {
+    padding: 2%;
+}
+
+main.time input {
+    min-width: 17em;
+}
+
+main.time .pure-control-group {
+    margin: 1em;
+}
